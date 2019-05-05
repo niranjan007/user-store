@@ -28,6 +28,9 @@ export function userReducer(state = initialState, action: fromUserAction.UserAct
   switch (action.type) {
 
     case fromUserAction.UserActionTypes.ADD_USER:
+      return state;
+
+    case fromUserAction.UserActionTypes.ADD_USER_SUCCESS:
       return userAdapter.addOne(action.payload, state);
 
     case fromUserAction.UserActionTypes.DELETE_USER:

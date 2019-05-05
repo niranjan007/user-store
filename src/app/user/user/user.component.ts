@@ -5,6 +5,7 @@ import { User } from '../models/user.entity';
 import { AddUser, DeleteUser, UpdateCurrentUser, UpdateUser } from '../store/user.actions';
 import * as fromUser from '../store/user.reducer';
 import { Observable } from 'rxjs';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user',
@@ -15,8 +16,8 @@ export class UserComponent implements OnInit {
 
   user: User = {
     id: 1,
-    fname: "Shobha",
-    lname: "Acharya",
+    fname: "Niranjan",
+    lname: "Murthy",
     city: "Sydney"
   }
 
@@ -25,7 +26,7 @@ export class UserComponent implements OnInit {
   users: Observable<any>;
   currentUser: Observable<User>;
 
-  constructor(private store: Store<UserState>) { }
+  constructor(private store: Store<UserState>, private userService : UserService) { }
 
   ngOnInit() {
     this.users = this.store.select<any>(fromUser.selectTotal);
@@ -37,6 +38,7 @@ export class UserComponent implements OnInit {
     this.store.dispatch(new AddUser(this.user));
     this.userId++;
     this.store.dispatch(new UpdateCurrentUser(this.user));
+    this.userService.addUser(this.user).subscribe();
   }
 
   updateUser(){

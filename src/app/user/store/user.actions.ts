@@ -4,6 +4,8 @@ import { Update } from '@ngrx/entity';
 
 export enum UserActionTypes {
   ADD_USER = '[User] Add User',
+  ADD_USER_SUCCESS = '[User] Add User Success',
+  ADD_USER_FAIL = '[User] Add User Fail',
   UPDATE_USER = '[User] Update User',
   DELETE_USER = '[User] Delete User',
   UPDATE_CURRENT_USER = '[User] Update Current User',
@@ -12,6 +14,16 @@ export enum UserActionTypes {
 export class AddUser implements Action {
   readonly type = UserActionTypes.ADD_USER;
   constructor(public payload: User) { }
+}
+
+export class AddUserSuccess implements Action {
+  readonly type = UserActionTypes.ADD_USER_SUCCESS;
+  constructor(public payload: User) { }
+}
+
+export class AddUserFail implements Action {
+  readonly type = UserActionTypes.ADD_USER_FAIL;
+  constructor(public payload: string) { }
 }
 
 export class UpdateUser implements Action {
@@ -30,6 +42,8 @@ export class UpdateCurrentUser implements Action {
 }
 
 export type UserActions = AddUser
+  | AddUserSuccess
+  | AddUserFail
   | UpdateUser
   | DeleteUser
   | UpdateUser

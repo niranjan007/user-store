@@ -34,6 +34,9 @@ export function userReducer(state = initialState, action: fromUserAction.UserAct
       return userAdapter.addOne(action.payload, state);
 
     case fromUserAction.UserActionTypes.DELETE_USER:
+      return state;
+
+    case fromUserAction.UserActionTypes.DELETE_USER_SUCCESS:
       return userAdapter.removeOne(action.payload, state);
 
     case fromUserAction.UserActionTypes.UPDATE_USER:

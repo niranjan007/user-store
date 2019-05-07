@@ -1,17 +1,44 @@
 <div class="container">
   <br>
-  <button type="button" class="btn btn-primary" (click) = "addUser()">AddUser</button>
+  <form>
+    <div class="form-group">
+      <label for="fname">First name</label>
+      <input type="text" class="form-control" [(ngModel)]="user.fname" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="lname">Last name</label>
+      <input type="text" class="form-control" [(ngModel)]="user.lname" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" [(ngModel)]="user.city" [ngModelOptions]="{standalone: true}">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="addUser()">AddUser</button>
+  </form>
+
   <br>
   <hr>
-  <button type="button" class="btn btn-primary" (click) = "removeUser()">DeleteUser</button>
+  <button type="button" class="btn btn-primary" (click)="removeUser()">DeleteUser</button>
   <br>
   <hr>
-  <button type="button" class="btn btn-primary" (click) = "updateUser()">Update User</button>
+  <button type="button" class="btn btn-primary" (click)="updateUser()">Update User</button>
   <br>
   <hr>
-  <button type="button" class="btn btn-primary" (click) = "displayUsers()">Users List</button>
+  <div class="container">
+    <button type="button" class="btn btn-primary" (click)="displayUsers()">Users List</button>
+    <ul>
+      <li *ngFor="let user of users | async users">
+        {{user.fname}}
+        {{user.lname}}
+        {{user.city}}
+        <button type="button" class="btn btn-danger btn-small" (click)="removeUser(user)">X</button>
+      </li>
+    </ul>
+
+  </div>
+
   <br>
   <hr>
-  <button type="button" class="btn btn-primary" (click) = "displayCurrentUser()">Current User</button>
- 
+  <button type="button" class="btn btn-primary" (click)="displayCurrentUser()">Current User</button>
+
 </div>

@@ -4,12 +4,14 @@ import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/user.effects'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [UserComponent],
   imports: [
     CommonModule,
     HttpClientModule,
+    FormsModule,
     EffectsModule.forFeature([UserEffects])
   ], 
   exports:[UserComponent]

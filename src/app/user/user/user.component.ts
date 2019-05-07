@@ -15,13 +15,11 @@ import { UserService } from '../user.service';
 export class UserComponent implements OnInit {
 
   user: User = {
-    id: 1,
     fname: "Niranjan",
     lname: "Murthy",
     city: "Sydney"
   }
 
-  userId: number = 0;
 
   users: Observable<any>;
   currentUser: Observable<User>;
@@ -29,29 +27,23 @@ export class UserComponent implements OnInit {
   constructor(private store: Store<UserState>, private userService : UserService) { }
 
   ngOnInit() {
-    this.users = this.store.select<any>(fromUser.selectTotal);
-    this.currentUser = this.store.select<User>(fromUser.currentUser);
+
   }
 
   addUser() {
-    this.user.id = this.userId;
     this.store.dispatch(new AddUser(this.user));
-    this.userId++;
-    this.store.dispatch(new UpdateCurrentUser(this.user));
-    this.userService.addUser(this.user).subscribe();
   }
 
   updateUser(){
-    this.user.fname = "XXX";
     this.store.dispatch(new UpdateUser( '2', this.user));
   }
 
-  removeUser() {
-    this.store.dispatch(new DeleteUser(2));
+  removeUser(user : User) {
+   this.store.dispatch(new DeleteUser(user.id));
   }
 
   displayUsers() {
-    this.users.subscribe(users => console.log(users));
+    this.users = this.userService.getAllUsers();
   }
 
   displayCurrentUser() {

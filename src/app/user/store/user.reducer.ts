@@ -40,6 +40,9 @@ export function userReducer(state = initialState, action: fromUserAction.UserAct
       return userAdapter.removeOne(action.payload, state);
 
     case fromUserAction.UserActionTypes.UPDATE_USER:
+      return state;
+
+    case fromUserAction.UserActionTypes.UPDATE_USER_SUCCESS:
       return userAdapter.updateOne({
         id: action.id,
         changes: action.changes
@@ -48,6 +51,16 @@ export function userReducer(state = initialState, action: fromUserAction.UserAct
     case fromUserAction.UserActionTypes.UPDATE_CURRENT_USER:
       state.currentUser = action.payload;
       return { ...state };
+
+    case fromUserAction.UserActionTypes.UPDATE_USERS:
+      return state;
+    
+    case fromUserAction.UserActionTypes.GET_USERS:
+      return state;
+    
+    case fromUserAction.UserActionTypes.GET_USERS_SUCCESS:
+      return 
+
     default:
       return state;
   }

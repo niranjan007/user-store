@@ -31,4 +31,12 @@ export class UserEffects {
       ))
     )
 
+  @Effect()
+  getUsers$ = this.actions$
+    .pipe(
+      ofType(fromUser.UserActionTypes.GET_USERS),
+      mergeMap((action : fromUser.GetUsers) => this.userService.getAllUsers().pipe(
+        map( users => new fromUser.GetUsersSuccess())
+      ) )
+    )  
 }

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserState, userAdapter } from '../store/user.reducer'
 import { User } from '../models/user.entity';
-import { AddUser, DeleteUser, UpdateCurrentUser, UpdateUser } from '../store/user.actions';
+import { AddUser, DeleteUser, UpdateCurrentUser, UpdateUser, GetUsers } from '../store/user.actions';
 import * as fromUser from '../store/user.reducer';
 import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
   selector: 'app-user',
@@ -21,13 +22,14 @@ export class UserComponent implements OnInit {
   }
 
 
-  users: Observable<any>;
+  users$: Observable<Array<User>>;
   currentUser: Observable<User>;
 
   constructor(private store: Store<UserState>, private userService : UserService) { }
 
   ngOnInit() {
-
+    this.users$ = this.store.select(fromUser.selectAll) ;
+    this.users$.subscribe(users => console.log(users));
   }
 
   addUser() {
@@ -35,7 +37,7 @@ export class UserComponent implements OnInit {
   }
 
   updateUser(){
-    this.store.dispatch(new UpdateUser( '2', this.user));
+    //this.store.dispatch(new UpdateUser( '2', this.user));
   }
 
   removeUser(user : User) {
@@ -43,7 +45,8 @@ export class UserComponent implements OnInit {
   }
 
   displayUsers() {
-    this.users = this.userService.getAllUsers();
+    // this.users = this.userService.getAllUsers();
+    this.store.dispatch(new GetUsers())
   }
 
   displayCurrentUser() {

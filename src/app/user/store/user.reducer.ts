@@ -59,7 +59,13 @@ export function userReducer(state = initialState, action: fromUserAction.UserAct
       return state;
     
     case fromUserAction.UserActionTypes.GET_USERS_SUCCESS:
-      return 
+      return userAdapter.upsertMany(action.payload, state);;
+
+    case fromUserAction.UserActionTypes.UPDATE_USERS:
+      return state;
+    
+    case fromUserAction.UserActionTypes.UPDATE_USERS_SUCCESS:
+      return userAdapter.upsertMany(action.payload, state);
 
     default:
       return state;
@@ -78,4 +84,5 @@ export const currentUser = createSelector(
   usersState,
   (state: UserState) => state.currentUser
 );
+
 

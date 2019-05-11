@@ -36,7 +36,7 @@ export class UserEffects {
     .pipe(
       ofType(fromUser.UserActionTypes.GET_USERS),
       mergeMap((action : fromUser.GetUsers) => this.userService.getAllUsers().pipe(
-        map( users => new fromUser.GetUsersSuccess())
+        map( users => new fromUser.GetUsersSuccess(users))
       ) )
     )  
 }

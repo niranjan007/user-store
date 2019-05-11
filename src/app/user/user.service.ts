@@ -27,8 +27,8 @@ export class UserService {
     this.http.put(this.uri + "user", user);
   }
 
-  getAllUsers() {
-    return this.http.get(this.uri + "users");
+  getAllUsers() : Observable<Array<User>>{
+    return this.http.get<Array<User>>(this.uri + "users");
   }
 
 }
